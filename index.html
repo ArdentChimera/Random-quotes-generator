@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fuzzy+Bubbles&family=Josefin+Sans:ital,wght@0,400;1,700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+
+    <title>Quote Generator</title>
+</head>
+
+<body>
+    <div class="container-fluid">
+    <div class="area">
+        <ul class="circles">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    <section id="container-main">
+        <div class="container text-center"></div>
+        <div class="row justify-content-md-center">
+            <div class="col-lg-12">
+                <h1>Generete your random quote</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 quotes-div">
+                <p id="quote-string">Press the button bellow</p>
+                <p id="author-string"></p>
+            </div>
+        </div>
+        <div>
+            <div class="d-grid gap-2 col-10 mx-auto">
+                <button class="btn btn-outline-light" id="generateBtn" type="button">Generate</button>
+            </div>
+        </div>
+        </div>
+    </div>
+    </section>
+
+
+
+
+
+
+
+   
+    <script>
+        let generateBtn = document.getElementById('generateBtn')
+        let quoteParagraph = document.getElementById('quote-string')
+        let authorParagraph = document.getElementById('author-string')
+        let quoteString = '';
+        let authorString = '';
+
+        let getButton = document.getElementById('generateBtn')
+        getButton.addEventListener('click', function () {
+            fetch('https://goquotes-api.herokuapp.com/api/v1/random?count=1')
+                .then(response => response.json())
+                .then(data => {
+                    quoteString = data.quotes[0].text
+                    authorString = data.quotes[0].author
+                    quoteParagraph.innerText = '"' + quoteString + '"'
+                    authorParagraph.innerText = authorString
+		
+	        });
+        })
+
+    </script>
+</body>
+
+</html>
